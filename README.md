@@ -168,17 +168,15 @@ This final layer will be the same height and width of the input image, and will 
 
 ##### Evaluation
 
-| Learning Rate | Batch Size | Num Epochs | Steps per Epoch | Validation Steps | Workers |  Final Score |
-|---|---|---|---|---|---|---|
-|.001|64|60|75|50|120|**0.404**|
-|.001|64|30|75|50|120|**--**|
-|   |   |   |   |   |   |  |
-|   |   |   |   |   |   |   |   |
+| Learning Rate | Batch Size | Num Epochs | Steps per Epoch | Validation Steps | Workers |  Final Score |Result Page|Success|
+|---|---|---|---|---|---|---|---|--|
+|.001|64|60|75|50|120|**0.404**|[Result Page](./model_training_001_64_60_75_50_120.html)|Yes|
+|.001|64|30|75|50|120|**0.394**|[Result Page](model_training_001_64_30_75_50_120.html)|No|
+|.001|64|45|65|50|120|**.413**|[Result Page](model_training_001_64_45_75_50_120.html)|Yes|
+|   |   |   |   |   |   |   |   ||  |
 
 
-
-I set the steps to 65, kept the `learning_rate=0.001` and the number of epochs to 60 -- because this should yield decent accuracy, but not take all day. The `final_score` came out as **~0.404**, Success!
 
 ### Future Enhancements
 
-I am definitely going to get myself one of those super duper video cards so I can play around with these parameters!!!  Does anybody know a used 1080 NVidia for less than $700?
+This project is a good excuse to buy a very expensive video card, something like a 1080 Ti NVidia Card :-)
