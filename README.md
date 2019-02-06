@@ -31,6 +31,8 @@ Lesson 33.4 shows how to build a Fully Convolutional Neural Network (FCN) in pro
 
 Encoding --> Decoding  --> Assign each pixel to one of the classes.
 
+[Model](fcn_model.JPG)
+
 #### Architecture
 I will be sticking with the lecture and start with the symmetrical 5 layer model architecture.  
 The structure will be Input-->64-->126-->256-->126-->64-->Output
