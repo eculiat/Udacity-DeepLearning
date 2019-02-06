@@ -31,14 +31,14 @@ Lesson 33.4 shows how to build a Fully Convolutional Neural Network (FCN) in pro
 
 Encoding --> Decoding  --> Assign each pixel to one of the classes.
 
-[Model](fcn_model.JPG)
+![Model](./fcn-model.JPG)
 
 #### Architecture
 I will be sticking with the lecture and start with the symmetrical 5 layer model architecture.  
 The structure will be Input-->64-->126-->256-->126-->64-->Output
 
 #### Input
-The original image is of size 256x256x3 and resized to 160x160x3 with `data_iterator.py`.  Giving us an input layer size of 160,160,3.  Using a 1x1 convolutional layer in the middle of the network allows us to take any sized image.  A fully connected layer would require a specifi set of input dimensions.
+The original image is of size 256x256x3 and resized to 160x160x3 with `data_iterator.py`.  Giving us an input layer size of 160,160,3.  Using a 1x1 convolutional layer in the middle of the network allows us to take any sized image.  A fully connected layer would require a specific set of input dimensions.
 
 #### Encoder
 The Encoder's job is to get the important features in the image, keep them in memory, remove noise of other pixels, decrease width and height while increasing layer depth.
@@ -93,9 +93,6 @@ def fcn_model(inputs, num_classes):
 
 Upsampling is crucial in the second half of our FCN in order to transform the important features we learned from encoding into the final segmented image in the output. **Bilinear Upsampling** helps transform our downsampled image back into the resolution of our original input image.
 
-Here's a good dipiction of how different types of **upsampling** works:
-
-IMAGE goes here!!!
 
 **Bilinear Upsampling** will be used repeatedly for the Decoder Layer.
 ```
@@ -172,13 +169,13 @@ This final layer will be the same height and width of the input image, and will 
 
 | Learning Rate | Batch Size | Num Epochs | Steps per Epoch | Validation Steps | Workers |  Final Score |Result Page|Success|
 |---|---|---|---|---|---|---|---|--|
-|.001|64|60|75|50|120|**0.404**|[Result Page](./model_training_001_64_60_75_50_120.html)|Yes|
-|.001|64|30|75|50|120|**0.394**|[Result Page](model_training_001_64_30_75_50_120.html)|No|
-|.001|64|45|65|50|120|**.413**|[Result Page](model_training_001_64_45_75_50_120.html)|Yes|
-| .001  |64|40|65|50|120|**.385**|   |No|  |
+|.001|64|60|75|50|120|**0.404**|model_training_001_64_60_75_50_120.html|Yes|
+|.001|64|30|75|50|120|**0.394**|model_training_001_64_30_75_50_120.html|No|
+|.001|64|45|65|50|120|**.413**|model_training_001_64_45_75_50_120.html|Yes|
+| .001  |64|40|65|50|120|**.385**|model_training_001_64_40_75_50_120.html|No|  |
 
-
+A sweet spot of 45 epochs gave me the best result.
 
 ### Future Enhancements
 
-This project is a good excuse to buy a very expensive video card, something like a 1080 Ti NVidia Card :-)
+This project is a good excuse to buy a very expensive video card, something like a 1080 Ti NVidia Card :-)  Playing around with Tensorflow, kera and the hyperparameters give a good insight on how machine learning works.
