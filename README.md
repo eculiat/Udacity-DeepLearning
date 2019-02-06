@@ -173,7 +173,7 @@ This final layer will be the same height and width of the input image, and will 
 |.001|64|60|75|50|120|**0.404**|[Result Page](./model_training_001_64_60_75_50_120.html)|Yes|
 |.001|64|30|75|50|120|**0.394**|[Result Page](model_training_001_64_30_75_50_120.html)|No|
 |.001|64|45|65|50|120|**.413**|[Result Page](model_training_001_64_45_75_50_120.html)|Yes|
-|   |   |   |   |   |   |   |   ||  |
+| .001  |64|40|65|50|120|**.385**|   |No|  |
 
 
 
