@@ -1,4 +1,4 @@
-[![Udacity - Robotics NanoDegree Program](https://s3-us-west-1.amazonaws.com/udacity-robotics/Extra+Images/RoboND_flag.png)](https://www.udacity.com/robotics)
+Udacity - Robotics NanoDegree Program](https://s3-us-west-1.amazonaws.com/udacity-robotics/Extra+Images/RoboND_flag.png)](https://www.udacity.com/robotics)
 
 ## Project 4: Deep Learning  - Follow Me Quadcopter
 ##### Udacity Robotics Nanodegree
@@ -33,17 +33,23 @@ Encoding --> Decoding  --> Assign each pixel to one of the classes.
 
 ![Model](./fcn-model.JPG)
 
+#### Introduction
+Numerous applications have been from Encoding-Decoding images.  A small sample would be generating higher resolution images, latent space clustering and full image colorization.  The time and effort saved in auto classifying images or documents is enormous!  This is one of the main reason I am very much interested in this topic.  Although, just like any other system – it can be abused and used for purposes not intended for or beyond the scope of the model.  Such as wrong training data, mixing classifications and expecting the model to do well or as the lectures suggest – an overfitting.
+
+An article written by [Julien Despois](Application-Photo Enhancement](https://hackernoon.com/autoencoders-deep-learning-bits-1-11731e200694) is a good overview of Encoder-Decoder otherwise known as Autocoder.
+
+
 #### Architecture
 I will be sticking with the lecture and start with the symmetrical 5 layer model architecture.  
 The structure will be Input-->64-->126-->256-->126-->64-->Output
 
 #### Input
-The original image is of size 256x256x3 and resized to 160x160x3 with `data_iterator.py`.  Giving us an input layer size of 160,160,3.  Using a 1x1 convolutional layer in the middle of the network allows us to take any sized image.  A fully connected layer would require a specific set of input dimensions.
+The original image is of size 256x256x3 and resized to 160x160x3 with `data_iterator.py`.  Giving us an input layer size of 160x160x3.  Using a 1x1 convolutional layer in the middle of the network allows us to take any sized image.  A fully connected layer would require a specific set of input dimensions.
 
 #### Encoder
 The Encoder's job is to get the important features in the image, keep them in memory, remove noise of other pixels, decrease width and height while increasing layer depth.
 
-First two layers are the encoder and responsible in getting the features to extract from the input image.  The first layer is set to have the strides=2 and number of filters to be 64.
+First two layers are the encoder and responsible in getting the features to extract from the input image.  The first layer is set to have the strides=2 and number of filters to be 64.  I will loose dimensionality in height and width for the layers by choosing strides=2 but will speed up the computations.  I will experiment with other values of strides if compute time is available.
 
 The formula in determining height/width of the next layers: (N-F + 2*P)/S + 1.
 
@@ -51,7 +57,7 @@ layer1_height_width = (160-3 + 2*1)/2 + 1, so layer1 = 80x80x64 since we chose 6
 
 For the second layer: 2^7=128 filters of size 3x3.
 
-The encoder block harnesses the separable_conv2d_batchnor() which defaults to a kernize size of 3x and same padding.  This will generate an output of K filter layers deep, with width and height of (n-F + 2*p)/S + 1.
+The encoder block harnesses the separable_conv2d_batchnor() which defaults to a kernel size of 3x3 and same padding.  This will generate an output of K filter layers deep with width and height of (n-F + 2*p)/S + 1.
 
 ```
 def encoder_block(input_layer, filters, strides):
@@ -74,6 +80,10 @@ Between the Encoder and the Decoder is the 1x1 **convolutional layer** for the t
 1. The network is more flexible by allowing different sized input image, instead of being fixed to one size.
 2. It decreases dimensions, while preserving spatial information of the image, which allows us to output a segmented image.
 3. It adds depth to our model and increase parameters at a fairly low computational price.
+
+In summary, 1x1 convolution is a very inexpensive way of making your model deeper, have more parameters without completely changing the structure, shrink spacial information and is cheap in terms of compute time.
+
+For more info on 1x1 convolution layer, go [here convolution 1x1 written by Adi Prakash](https://iamaaditya.github.io/2016/03/one-by-one-convolution/)
 
 *The 1x1 convolution*
 ![1x1 Convolution](1x1convolution.png)
@@ -176,6 +186,18 @@ This final layer will be the same height and width of the input image, and will 
 
 A sweet spot of 45 epochs gave me the best result.
 
-### Future Enhancements
+#### Afterthoughts
+
+I believe this model would do good in classifying objects as long as it is provided with the proper training.  The proper training means correct images and correct classification for the training data is entered.  Also I believe the model would do much better if classes/object are already grouped together -- meaning cats belong to images of cats, dogs belong to images of dogs, and cars belong to images of dogs.  I have to experiment how the model will do if I mix images of cats, dogs and cars.
+
+#### Future Enhancements
 
 This project is a good excuse to buy a very expensive video card, something like a 1080 Ti NVidia Card :-)  Playing around with Tensorflow, kera and the hyperparameters give a good insight on how machine learning works.
+
+##### Further Reading
+[Back Propagation Notes](https://medium.com/@karpathy/yes-you-should-understand-backprop-e2f06eab496b)
+[Back Propagation Video](https://www.youtube.com/watch?v=i94OvYb6noo)
+
+[Quora Encoder-Decoder](https://www.quora.com/What-is-an-Encoder-Decoder-in-Deep-Learning)
+[Encoder-Decoder Semantic Segmentation](https://courses.cs.washington.edu/courses/cse576/17sp/notes/Sachin_Talk.pdf)
+[Image Segmentation](https://leonardoaraujosantos.gitbooks.io/artificial-inteligence/content/image_segmentation.html)
