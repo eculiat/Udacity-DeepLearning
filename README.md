@@ -188,7 +188,11 @@ A sweet spot of 45 epochs gave me the best result.
 
 #### Afterthoughts
 
-I believe this model would do good in classifying objects as long as it is provided with the proper training.  The proper training means correct images and correct classification for the training data is entered.  Also I believe the model would do much better if classes/object are already grouped together -- meaning cats belong to images of cats, dogs belong to images of dogs, and cars belong to images of dogs.  I have to experiment how the model will do if I mix images of cats, dogs and cars.
+I believe this model would do good in classifying objects as long as it is provided with the proper training.  The proper training means correct images and correct classification for the training data is entered.  Not only can the model classify images with good accuracy, it can also know `WHERE` is the subject in the image! I believe the model would do much better if classes/object are already grouped together -- meaning cats belong to images of cats, dogs belong to images of dogs, and cars belong to images of dogs.  I have to experiment how the model will do if I mix images of cats, dogs and cars.
+
+There are disadvantages in the encoder-decoder model though and they are mainly overfitting, chance effect, overtraining and interpretation.  One would think that the more complicated/deeper the network the better it would be in predicting.  The discussion in this [thread](https://stats.stackexchange.com/questions/56950/neural-network-with-skip-layer-connections) "when deeper networks are able to start converging, a degradation problem is exposed: accuracy gets saturated (which might be unsurprising) and then degrades rapidly. Unexpectedly, such degradation is not caused by overfitting, and adding more layers to a suitably deep model leads to higher training error..."  <-- that statement is backed up by research and also increadibly insightly.  (Take not folks -- Do not go into the rabbit hole!)  It is because of this behavior in the encoder-decoder model that `Skipping` is introduced.  For further readings in this field: (AutoEncoder)[https://en.wikipedia.org/wiki/Autoencoder], [Encoder-Decoder](https://courses.cs.washington.edu/courses/cse576/17sp/notes/Sachin_Talk.pdf), [Image Segmentation](https://leonardoaraujosantos.gitbooks.io/artificial-inteligence/content/image_segmentation.html).
+
+The main take away is setting up the model is as important a the code itself.
 
 #### Future Enhancements
 
